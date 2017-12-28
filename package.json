@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "start:dev": "NODE_ENV=development nodemon --ignore client/src/ --inspect=7000 index.js | bunyan -o short"
+    "start:dev": "NODE_ENV=development nodemon --inspect=9000 index.js | bunyan -o short"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.1",
@@ -21,6 +21,7 @@
   "dependencies": {
     "bunyan": "^1.8.9",
     "cheerio": "^0.22.0",
+    "cookie": "^0.3.1",
     "dotenv": "^4.0.0",
     "form-data": "^2.1.2",
     "koa": "^2.2.0",
