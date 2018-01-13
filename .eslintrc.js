@@ -11,19 +11,11 @@ module.exports = {
     node: true
   },
 
-  extends: [
-    'standard',
-    'prettier',
-    'plugin:import/errors'
-  ],
+  extends: ['standard', 'plugin:prettier/recommended', 'plugin:import/errors'],
 
   plugins: ['prettier', 'import'],
 
   rules: {
     'prettier/prettier': ['error', prettierConfig]
-  },
-
-  globals: {
-    process: true
   }
 }

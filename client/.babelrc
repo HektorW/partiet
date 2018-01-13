@@ -1,0 +1,37 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false,
+        "useBuiltIns": true,
+        "targets": {
+          "browsers": ["> 2%"]
+        }
+      }
+    ],
+    "react"
+  ],
+
+  "plugins": [
+    [
+      "transform-runtime",
+      {
+        "helpers": false,
+        "polyfill": false,
+        "regenerator": true
+      }
+    ],
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "syntax-dynamic-import",
+    "react-hot-loader/babel"
+  ],
+
+  "env": {
+    "production": {
+      "presets": ["minify"],
+      "plugins": ["transform-react-remove-prop-types"]
+    }
+  }
+}
