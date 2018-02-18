@@ -9,19 +9,22 @@ app.use(async ctx => {
     return
   }
 
-  // ctx.body = await fetchTable(
-  //   'http://asp.malmokorpenfotboll.com/matchtabell.aspx',
-  //   'cup',
-  //   'Inomhusserien%207%20manna%20Herrar%202017%20-%202018',
-  //   'Partiet'
-  // )
+  ctx.set('Access-Control-Allow-Origin', '*')
 
   ctx.body = await fetchTable(
     'http://asp.malmokorpenfotboll.com/matchtabell.aspx',
     'cup',
-    'Utomhusserien%202017',
+    'Inomhusserien%207%20manna%20Herrar%202017%20-%202018',
+    // 'Utomhusserien%202017',
     'Partiet'
   )
+
+  // ctx.body = await fetchTable(
+  //   'http://asp.malmokorpenfotboll.com/matchtabell.aspx',
+  //   'cup',
+  //   'Utomhusserien%202017',
+  //   'Partiet'
+  // )
 
   // http://asp.malmokorpenfotboll.com/matchtabell.aspx?cup=Utomhusserien%202017
 })

@@ -1,8 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import TablesViewer from './TablesViewer/TablesViewer.connect'
 import './root.scss'
 
-const Root = ({ currentCount, increaseCount, decreaseCount }) => (
+const Root = ({
+  currentCount,
+  increaseCount,
+  decreaseCount,
+}) => (
   <div className="root">
     <h1 className="root__title">Partiet</h1>
 
@@ -17,6 +22,8 @@ const Root = ({ currentCount, increaseCount, decreaseCount }) => (
         +
       </button>
     </div>
+
+    <TablesViewer />
   </div>
 )
 

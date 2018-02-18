@@ -36,7 +36,10 @@ const WEBPACK_CONFIG = {
     port: devServerPort,
     host: '0.0.0.0',
     historyApiFallback: true,
-    contentBase: DIST
+    contentBase: DIST,
+    proxy: {
+      '/api': 'http://localhost:8000/'
+    }
   },
 
   devtool: PRODUCTION === true ? false : 'source-map',
