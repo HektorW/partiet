@@ -11,7 +11,8 @@
   "scripts": {
     "start": "node index.js",
     "start:dev": "NODE_ENV=development nodemon --inspect=9000 index.js | bunyan -o short",
-    "build": "cd client && npm run build"
+    "build": "cd client/ && npm install && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.1",
