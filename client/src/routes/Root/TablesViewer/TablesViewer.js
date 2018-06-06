@@ -1,20 +1,38 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 
-const TablesViewer = ({ teams, fetchTeams }) => (
-  <div>
-    <h2>Teams</h2>
-    <button onClick={fetchTeams}>
-      Fetch teams!
-    </button>
+export default class TablesViewer extends PureComponent {
+  leagueId = 'Utomhusserien 2018'
+  teamName = 'Partiet'
 
-    <ul>
-      {teams.map(team => (
-        <li key={team.name}>
-          {team.position}. {team.name} - {team.points}
-        </li>
-      ))}
-    </ul>
-  </div>
-)
+  componentWillMount() {
+    this.props.fetchTeams(this.leagueId, this.teamName)
+  }
 
-export default TablesViewer
+  render() {
+    const { teams } = this.props
+
+    return (
+      <div>
+        <h2>{this.leagueId}</h2>
+
+        <table>
+          <thead>
+            <th>Position</th>
+            <th>Team</th>
+            <th>Points</th>
+          </thead>
+
+          {teams.map(team => (
+            <tr key={team.name}>
+              <td>{team.position}</td>
+              <td>
+                {team.name === this.teamName ? <b>{team.name}</b> : team.name}
+              </td>
+              <td>{team.points}</td>
+            </tr>
+          ))}
+        </table>
+      </div>
+    )
+  }
+}

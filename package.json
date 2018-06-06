@@ -10,7 +10,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "start:dev": "NODE_ENV=development nodemon --inspect=9000 index.js | bunyan -o short"
+    "start:dev": "NODE_ENV=development nodemon --inspect=9000 index.js | bunyan -o short",
+    "build": "cd client && npm run build"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.1",
@@ -33,7 +34,9 @@
     "form-data": "^2.1.2",
     "koa": "^2.2.0",
     "koa-bodyparser": "^4.2.0",
+    "koa-compose": "^4.1.0",
     "koa-router": "next",
+    "koa-static": "^4.0.3",
     "node-fetch": "^1.6.3"
   }
 }

@@ -27,7 +27,11 @@ module.exports = async function fetchTable(
 
   const $teamOption = $('#cmbLag option')
     .filter((index, optionEl) => {
-      return $(optionEl).text() === teamName
+      return (
+        $(optionEl)
+          .text()
+          .toLowerCase() === teamName.toLowerCase()
+      )
     })
     .eq(0)
 
