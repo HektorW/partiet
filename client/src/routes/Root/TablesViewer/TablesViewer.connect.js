@@ -3,7 +3,9 @@ import TablesViewer from './TablesViewer'
 import { fetchTeams } from '../../../modules/tables/tables.actions'
 
 const mapStateToProps = ({ tables }) => ({
-  teams: tables.teams
+  teams: tables.teams,
+  isFetching: tables.isFetching,
+  fetchError: tables.fetchError
 })
 
 const mapDispatchToProps = {

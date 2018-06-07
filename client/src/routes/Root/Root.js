@@ -2,13 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import TablesViewer from './TablesViewer/TablesViewer.connect'
 import './root.scss'
+import MainLayout from '../../components/MainLayout'
 
 const Root = () => (
-  <div className="root">
-    <h1 className="root__title">Partiet</h1>
-
+  <MainLayout>
     <TablesViewer />
-  </div>
+  </MainLayout>
 )
 
 Root.propTypes = {}

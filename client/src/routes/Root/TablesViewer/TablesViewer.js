@@ -9,29 +9,43 @@ export default class TablesViewer extends PureComponent {
   }
 
   render() {
-    const { teams } = this.props
+    const { teams, isFetching, fetchError } = this.props
 
     return (
       <div>
         <h2>{this.leagueId}</h2>
 
-        <table>
-          <thead>
-            <th>Position</th>
-            <th>Team</th>
-            <th>Points</th>
-          </thead>
+        {isFetching && <div>Hämtar tabell..</div>}
 
-          {teams.map(team => (
-            <tr key={team.name}>
-              <td>{team.position}</td>
-              <td>
-                {team.name === this.teamName ? <b>{team.name}</b> : team.name}
-              </td>
-              <td>{team.points}</td>
-            </tr>
-          ))}
-        </table>
+        {fetchError && <div>Något gick fel, kunde inte hämta tabellen :(</div>}
+
+        {teams && teams.length ? (
+          <table>
+            <thead>
+              <tr>
+                <th>Position</th>
+                <th>Team</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {teams.map(team => (
+                <tr key={team.name}>
+                  <td>{team.position}</td>
+                  <td>
+                    {team.name === this.teamName ? (
+                      <b>{team.name}</b>
+                    ) : (
+                      team.name
+                    )}
+                  </td>
+                  <td>{team.points}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : null}
       </div>
     )
   }

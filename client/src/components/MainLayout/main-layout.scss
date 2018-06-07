@@ -1,0 +1,17 @@
+@import '../../styles/variables';
+
+.main-layout {
+  &__header {
+    background-color: $black;
+    color: $white;
+    padding: 1em;
+
+    &-title {
+      margin: 0;
+    }
+  }
+
+  &__content {
+    padding: 1em;
+  }
+}

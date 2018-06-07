@@ -8,7 +8,7 @@ const app = new Koa()
 app.use(async (ctx, next) => {
   console.log(`request: "${ctx.path}"`)
   await next()
-  console.log(`reponse: ${ctx.status}, "${ctx.body}`)
+  console.log(`reponse: ${ctx.status}`)
 })
 
 app.use(api.routes())
