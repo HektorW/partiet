@@ -1,0 +1,48 @@
+@import '../../../styles/variables';
+
+.tables-viewer {
+  margin: 0 auto;
+  max-width: 700px;
+
+  &__container {
+    overflow: auto;
+  }
+
+  &__table {
+    border-collapse: collapse;
+    width: 100%;
+
+    th,
+    td {
+      &:nth-child(3),
+      &:nth-child(4) {
+        text-align: center;
+      }
+    }
+
+    th {
+      font-size: 0.8em;
+      padding: 1em;
+    }
+
+    td {
+      padding: 0.5em 1em;
+
+      &:nth-child(3) {
+        font-size: 0.7em;
+      }
+    }
+
+    &-head {
+      background-color: rgba($black, 0.1);
+      text-align: left;
+    }
+
+    &-row {
+      &--is-own {
+        background-color: rgba($gold, 0.2);
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+}
