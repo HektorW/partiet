@@ -63,13 +63,6 @@ const parseTable = $ => {
       10
     )
 
-    console.log(
-      $table
-        .find('td')
-        .eq(1)
-        .text()
-    )
-
     if (typeof leaguePosition !== 'number' || Number.isNaN(leaguePosition)) {
       lastTeamIndex = i - 1
       break

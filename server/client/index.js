@@ -8,7 +8,6 @@ function redirectToDevServer(ctx) {
     <p>Client is not served in DEVELOPMENT mode</p>
     <p>Try <a href="http://localhost:4000">http://localhost:4000</a></p>
   `
-  // ctx.response.redirect('http://localhost:4000')
 }
 
 const serveClient = serve(join(__dirname, '../../client/dist'))
