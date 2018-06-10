@@ -20,18 +20,20 @@ const NextMatch = ({ match, opposition }) =>
 
       <div className="next-match__date">
         <span className="next-match__date-day">
-          {WeekDays[match.date.getDay()]}
+          {WeekDays[match.date.getUTCDay()]}
         </span>
-        <span className="next-match__date-date">{match.date.getDate()}</span>
+        <span className="next-match__date-date">{match.date.getUTCDate()}</span>
         <span className="next-match__date-month">
-          {Months[match.date.getMonth()]}
+          {Months[match.date.getUTCMonth()]}
         </span>
       </div>
       <div className="next-match__time">
-        <span className="next-match__time-hour">{match.date.getHours()}</span>
+        <span className="next-match__time-hour">
+          {match.date.getUTCHours()}
+        </span>
         :
         <span className="next-match__time-minutes">
-          {match.date.getMinutes()}
+          {match.date.getUTCMinutes()}
         </span>
       </div>
     </div>

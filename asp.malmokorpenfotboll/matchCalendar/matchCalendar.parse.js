@@ -18,7 +18,7 @@ module.exports = function parseMatcheCalendar($) {
 const parseMatch = ($dateTable, $contentTable) => {
   const date = parseDate($dateTable)
   const { hours, minutes } = parseTime($contentTable)
-  date.setHours(hours, minutes)
+  date.setUTCHours(hours, minutes)
 
   return {
     date,
