@@ -6,15 +6,15 @@ const FormData = require('form-data')
 const submitButtonValue = 'Välj'
 
 module.exports = async function fetchPageDOM(
-  tableUrl,
+  url,
   query,
   optionListId,
   searchOptionText,
   submitButtonId
 ) {
-  const cookie = getSessionCookie(tableUrl, query)
+  const cookie = await getSessionCookie(url, query)
 
-  const pickOptionResponse = await fetch(tableUrl, {
+  const pickOptionResponse = await fetch(url, {
     headers: { cookie }
   })
 
@@ -26,14 +26,18 @@ module.exports = async function fetchPageDOM(
 
   const $teamOption = $pickOptionDOM(`#${optionListId} option`)
     .filter((index, optionEl) => {
-      return $pickOptionDOM(optionEl).text() === searchOptionText
+      return (
+        $pickOptionDOM(optionEl)
+          .text()
+          .toLowerCase() === searchOptionText.toLowerCase()
+      )
     })
     .eq(0)
 
   form.append(optionListId, $teamOption.val())
   form.append(submitButtonId, submitButtonValue)
 
-  const resultResponse = await fetch(tableUrl, {
+  const resultResponse = await fetch(url, {
     method: 'POST',
     body: form,
     headers: { cookie }
@@ -42,10 +46,10 @@ module.exports = async function fetchPageDOM(
   return cheerio.load(await resultResponse.text())
 }
 
-const getSessionCookie = async (tableUrl, query) => {
+const getSessionCookie = async (url, query) => {
   const sessionKey = 'ASP.NET_SessionId'
 
-  const response = await fetch(`${tableUrl}?${query}`)
+  const response = await fetch(`${url}?${query}`)
   const setCookieHeader = response.headers.get('set-cookie')
   const sessionValue = parseCookie(setCookieHeader)[sessionKey]
 

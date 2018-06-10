@@ -24,7 +24,7 @@ const findFirstNoneTeamIndex = ($, $tables) =>
   })
 
 const parseTeamStats = $teamTable => {
-  const $tds = $(element).find('td')
+  const $tds = $teamTable.find('td')
   const [scoredGoals, concededGoals] = $tds
     .eq(6)
     .text()

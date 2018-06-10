@@ -1,10 +1,7 @@
-const fetchTable = require('../../../scrape/fetchTable')
+const leagueTable = require('../../../asp.malmokorpenfotboll/leagueTable')
 
-const tableUrl = 'http://asp.malmokorpenfotboll.com/matchtabell.aspx'
-const queryKey = 'cup'
-
-module.exports = async function(ctx) {
+module.exports = async function leagueTableHandler(ctx) {
   const { leagueId, teamName } = ctx.params
 
-  ctx.body = await fetchTable(tableUrl, queryKey, leagueId, teamName)
+  ctx.body = await leagueTable(leagueId, teamName)
 }
