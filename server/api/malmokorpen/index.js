@@ -6,5 +6,9 @@ malmokorpenRoutes.get(
   '/leaguetable/:leagueId/:teamName',
   require('./leagueTable')
 )
+malmokorpenRoutes.get(
+  '/matchcalendar/:leagueId/:teamName',
+  require('./matchCalendar')
+)
 
 module.exports = malmokorpenRoutes
