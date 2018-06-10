@@ -2,7 +2,7 @@ const firstTeamTableIndex = 3
 
 module.exports = function parseLeagueTable($) {
   const $tables = $('#pData table').slice(firstTeamTableIndex)
-  const lastTeamIndex = findFirstNoneTeamIndex($, $tables) - 1
+  const lastTeamIndex = findFirstNoneTeamIndex($, $tables)
   const $teams = $tables.slice(0, lastTeamIndex)
 
   return $teams

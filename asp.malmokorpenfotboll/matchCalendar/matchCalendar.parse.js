@@ -1,6 +1,6 @@
 const firstMatchTableIndex = 2
 
-module.exports = function parseLeagueTable($) {
+module.exports = function parseMatcheCalendar($) {
   const $tables = $('#pData table').slice(firstMatchTableIndex)
   const matchCount = $tables.length / 3
 
