@@ -6,8 +6,8 @@ const matchNotificationModel = require('./models/match-notification')
 module.exports = function setupDb() {
   return db
     .setup()
-    .then(() => leagueModel.setup(db))
-    .then(() => pushSubscriptionModel.setup(db))
-    .then(() => matchNotificationModel.setup(db))
+    .then(leagueModel.setup)
+    .then(pushSubscriptionModel.setup)
+    .then(matchNotificationModel.setup)
     .then(() => console.log('Database and models setup'))
 }

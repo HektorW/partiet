@@ -1,16 +1,23 @@
+const db = require('../index')
 const createTable = require('./utils/createTable')
+const { createModelCamelCaser } = require('./utils/camelCaseModel')
 
 const tableName = (exports.tableName = 'league')
 
-const tableColumns = ['id INTEGER PRIMARY KEY', 'mainTeamId INTEGER']
+const tableColumnDefinitions = ['id INTEGER PRIMARY KEY', 'mainTeamId INTEGER']
 
-exports.setup = db => {
-  return createTable(db, tableName, tableColumns)
-}
+const { camelCaseAll } = createModelCamelCaser(tableColumnDefinitions)
 
-exports.addLeague = (db, leagueId, mainTeamId) => {
+exports.setup = () => createTable(db, tableName, tableColumnDefinitions)
+
+exports.addLeague = (leagueId, mainTeamId) => {
   const columns = ['id', 'mainTeamId']
   const values = [leagueId, mainTeamId]
 
   return db.insert(tableName, columns, values)
+}
+
+exports.getAllActiveLeagues = async () => {
+  const query = `SELECT * from ${tableName}`
+  return db.all(query).then(camelCaseAll)
 }

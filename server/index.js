@@ -1,4 +1,5 @@
 const Koa = require('koa')
+const bodyParser = require('koa-bodyparser')
 
 const api = require('./api')
 const client = require('./client')
@@ -10,6 +11,8 @@ app.use(async (ctx, next) => {
   await next()
   console.log(`reponse: ${ctx.status}`)
 })
+
+app.use(bodyParser())
 
 app.use(api.routes())
 app.use(api.allowedMethods())

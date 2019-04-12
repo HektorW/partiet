@@ -6,5 +6,8 @@ const { env } = process
 module.exports = {
   databaseSsl: getBool(env.DATABASE_SSL, false),
   databaseUrl: env.DATABASE_URL || null,
-  port: env.PORT || 4001
+  port: env.PORT || 4001,
+  vapidPublicKey: env.VAPID_PUBLIC_KEY,
+  vapidPrivateKey: env.VAPID_PRIVATE_KEY,
+  vapidSubject: env.VAPID_SUBJECT
 }
