@@ -24,7 +24,7 @@
     "eslint-plugin-prettier": "^2.4.0",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
-    "nodemon": "^1.11.0",
+    "nodemon": "^1.18.11",
     "prettier": "^1.9.2"
   },
   "dependencies": {
