@@ -30,4 +30,4 @@ if (module.hot) {
   module.hot.accept('./PartietApp', () => renderApp(PartietApp))
 }
 
-registerServiceWorker()
+// registerServiceWorker()
