@@ -1,6 +1,8 @@
+const config = require('./config')
 const server = require('./server')
+require('./server/db/setup')()
 
-const port = process.env.PORT || 4001
+const port = config.port
 
 server.listen(port, () => {
   console.log(`listening on port ${port}`)

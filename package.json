@@ -10,12 +10,13 @@
   },
   "scripts": {
     "start": "node index.js",
-    "start:dev": "NODE_ENV=development nodemon --inspect=9000 index.js | bunyan -o short",
+    "start:dev": "cross-env NODE_ENV=development nodemon --inspect=9000 index.js | bunyan -o short",
     "build": "cd client/ && npm install && npm run build",
     "heroku-postbuild": "npm run build"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.1",
+    "cross-env": "^5.2.0",
     "eslint": "^3.19.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-standard": "^11.0.0-beta.0",
@@ -38,6 +39,7 @@
     "koa-compose": "^4.1.0",
     "koa-router": "^7.4.0",
     "koa-static": "^4.0.3",
-    "node-fetch": "^1.6.3"
+    "node-fetch": "^1.6.3",
+    "pg": "^7.9.0"
   }
 }
