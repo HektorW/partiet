@@ -33,7 +33,7 @@ function buildMatchNotification(match) {
 
   const notificationOptions = {
     icon: '/images/logo.jpg',
-    badge: '/images/logo.jpg'
+    badge: '/images/soccer-ball-variant.png'
   }
 
   return { title, notificationOptions }
