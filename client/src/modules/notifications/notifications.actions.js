@@ -77,8 +77,10 @@ const sendSubscriptionToServer = subscription => {
     body: {
       subscription: {
         endpoint: subscription.endpoint,
-        p256dh: subscriptionJson.keys.p256dh,
-        auth: subscriptionJson.keys.auth
+        keys: {
+          p256dh: subscriptionJson.keys.p256dh,
+          auth: subscriptionJson.keys.auth
+        }
       }
     }
   }

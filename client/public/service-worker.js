@@ -2,13 +2,15 @@ self.addEventListener('push', onPush)
 self.addEventListener('notificationclick', onNotificationClick)
 
 function onPush(event) {
-  event.waitUntil(async () => {
-    const match = await event.data.json()
+  event.waitUntil(
+    (async () => {
+      const match = await event.data.json()
 
-    const { title, notificationOptions } = buildMatchNotification(match)
+      const { title, notificationOptions } = buildMatchNotification(match)
 
-    return self.registration.showNotification(title, notificationOptions)
-  })
+      return self.registration.showNotification(title, notificationOptions)
+    })()
+  )
 }
 
 function onNotificationClick(event) {
