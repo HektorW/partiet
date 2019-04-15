@@ -1,5 +1,6 @@
 const webPush = require('web-push')
 const config = require('../../config')
+const { removePushSubscriptionById } = require('../db/models/push-subscription')
 
 webPush.setVapidDetails(
   config.vapidSubject,
@@ -7,15 +8,29 @@ webPush.setVapidDetails(
   config.vapidPrivateKey
 )
 
-module.exports = function sendPushNotification(
+module.exports = async function sendPushNotification(
   subscriptionModel,
   notificationData,
   options
 ) {
   const subscription = JSON.parse(subscriptionModel.subscriptionJson)
-  return webPush.sendNotification(
-    subscription,
-    JSON.stringify(notificationData),
-    options
-  )
+  try {
+    await webPush.sendNotification(
+      subscription,
+      JSON.stringify(notificationData),
+      options
+    )
+  } catch (error) {
+    console.error('failed to send push notification', {
+      subscription: subscription.id,
+      error
+    })
+
+    if (error.statusCode === 404 || error.statusCode === 410) {
+      console.log('removing subscription', { subscription: subscription.id })
+      await removePushSubscriptionById(subscription.id)
+    }
+
+    throw error
+  }
 }

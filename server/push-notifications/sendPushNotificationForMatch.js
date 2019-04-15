@@ -21,9 +21,18 @@ module.exports = async function sendPushNotificationForMatch(
     }
   }
 
-  const result = await sendPushNotification(subscriptionModel, notificationData)
+  try {
+    const result = await sendPushNotification(
+      subscriptionModel,
+      notificationData
+    )
 
-  if (result.statusCode >= 200 && result.statusCode < 300) {
-    addNotification(subscriptionModel.id, match.id)
+    if (result.statusCode >= 200 && result.statusCode < 300) {
+      addNotification(subscriptionModel.id, match.id)
+    }
+  } catch (error) {
+    console.error('failed to send match notification', {
+      subscription: subscriptionModel.id
+    })
   }
 }

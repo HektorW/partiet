@@ -32,6 +32,13 @@ exports.addPushSubscription = async subscription => {
   await db.insert(tableName, insertColumns, insertValues)
 }
 
+exports.removePushSubscriptionById = async id => {
+  const query = `DELETE FROM ${tableName} WHERE id = $1`
+  const values = [id]
+
+  return db.run(query, values)
+}
+
 exports.removePushSubscription = async subscription => {
   const subscriptionJson = subscriptionToJson(subscription)
 
