@@ -1,8 +1,6 @@
 import HttpError from './HttpError'
-// import mergeDeep, { isObject } from 'utils/mergeDeep'
 
-
-async function request (url, options) {
+async function request(url, options) {
   let response
   try {
     response = await fetch(url, parseRequestOptions(options))
@@ -20,29 +18,25 @@ async function request (url, options) {
   return responseData
 }
 
-
 const parseRequestOptions = options => {
-  // const body = isObject(options.body)
-  //   ? JSON.stringify(options.body)
-  //   : options.body
+  const optionsClone = { ...options }
 
-  return { ...options }
-  // return mergeDeep({}, options, {
-  //   body,
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  // })
+  optionsClone.headers = optionsClone.headers || {}
+
+  if (typeof optionsClone.body === 'object') {
+    optionsClone.body = JSON.stringify(optionsClone.body)
+    optionsClone.headers['Content-Type'] = 'application/json'
+  }
+
+  return optionsClone
 }
-
 
 const parseResponseData = response =>
   response
-    .clone().json()
-    .catch(() =>
-      response.clone().text()
-    )
-
+    .clone()
+    .json()
+    .catch(() => response.clone().text())
 
 export const get = (url, options) => request(url, { ...options, method: 'GET' })
-export const post = (url, options) => request(url, { ...options, method: 'POST' })
+export const post = (url, options) =>
+  request(url, { ...options, method: 'POST' })

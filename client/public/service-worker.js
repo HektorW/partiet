@@ -1,9 +1,38 @@
-self.addEventListener('push', event => {
-  const notificationData = event.data.json()
+self.addEventListener('push', onPush)
+self.addEventListener('notificationclick', onNotificationClick)
 
-  event.waitUntil(
-    self.registration.showNotification('Match result', {
-      body: JSON.stringify(notificationData)
-    })
-  )
-})
+function onPush(event) {
+  event.waitUntil(async () => {
+    const match = await event.data.json()
+
+    const { title, notificationOptions } = buildMatchNotification(match)
+
+    return self.registration.showNotification(title, notificationOptions)
+  })
+}
+
+function onNotificationClick(event) {
+  const { notification } = event
+  const notificationData = notification.data
+
+  notification.close()
+
+  const openUrlPromise = self.clients.openWindow('/')
+
+  event.waitUntil(openUrlPromise)
+}
+
+function buildMatchNotification(match) {
+  const { teamA, teamB } = match
+
+  const title = `${teamA.name} [${teamA.score}] - ${teamB.name} [${
+    teamB.score
+  }]`
+
+  const notificationOptions = {
+    icon: '/images/logo.jpg',
+    badge: '/images/logo.jpg'
+  }
+
+  return { title, notificationOptions }
+}

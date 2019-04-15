@@ -8,7 +8,7 @@ import { AppContainer as HotLoaderContainer } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 import PartietApp from './PartietApp'
 import createStore from './store/createStore'
-import registerServiceWorker from './registerServiceWorker'
+import { registerServiceWorker } from './service-worker/registration'
 
 const rootElement = document.getElementById('app')
 const store = createStore()
@@ -30,4 +30,4 @@ if (module.hot) {
   module.hot.accept('./PartietApp', () => renderApp(PartietApp))
 }
 
-// registerServiceWorker()
+registerServiceWorker()
