@@ -2,7 +2,7 @@ import React from 'react'
 import compareTeamName from '../../../utils/compareTeamName'
 import './tables-viewer.scss'
 
-const TablesViewer = ({ teams, isFetching, fetchError }) => (
+const TablesViewer = ({ tableRows, isFetching, fetchError }) => (
   <div className="tables-viewer">
     <h2>{this.leagueId}</h2>
 
@@ -10,7 +10,7 @@ const TablesViewer = ({ teams, isFetching, fetchError }) => (
 
     {fetchError && <div>Något gick fel, kunde inte hämta tabellen :(</div>}
 
-    {teams && teams.length ? (
+    {tableRows && tableRows.length ? (
       <div className="tables-viewer__container">
         <table className="tables-viewer__table">
           <thead className="tables-viewer__table-head">
@@ -23,7 +23,7 @@ const TablesViewer = ({ teams, isFetching, fetchError }) => (
           </thead>
 
           <tbody className="tables-viewer__table-body">
-            {teams.map(team => (
+            {tableRows.map(team => (
               <tr
                 key={team.name}
                 className={`tables-viewer__table-row ${

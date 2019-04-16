@@ -2,12 +2,9 @@ const Router = require('koa-router')
 
 const malmokorpenRoutes = new Router()
 
+malmokorpenRoutes.get('/leaguetable/:leagueId', require('./leagueTable'))
 malmokorpenRoutes.get(
-  '/leaguetable/:leagueId/:teamName',
-  require('./leagueTable')
-)
-malmokorpenRoutes.get(
-  '/matchcalendar/:leagueId/:teamName',
+  '/matchcalendar/:leagueId/:teamId',
   require('./matchCalendar')
 )
 

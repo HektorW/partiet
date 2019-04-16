@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import TablesViewer from './TablesViewer'
 
 const mapStateToProps = ({ tables }) => ({
-  teams: tables.teams,
+  tableRows: tables.tableRows,
   isFetching: tables.isFetching,
   fetchError: tables.fetchError
 })

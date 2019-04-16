@@ -7,7 +7,7 @@ import {
 const initialState = {
   isFetching: false,
   fetchError: null,
-  teams: []
+  tableRows: []
 }
 
 export default function tablesReducer(state = initialState, action = {}) {
@@ -16,7 +16,7 @@ export default function tablesReducer(state = initialState, action = {}) {
       return { ...state, isFetching: true, fetchError: null }
 
     case FETCHING_TABLE_SUCCESS:
-      return { ...state, isFetching: false, teams: action.teams }
+      return { ...state, isFetching: false, tableRows: action.tableRows }
 
     case FETCHING_TABLE_FAILURE:
       return { ...state, isFetching: false, fetchError: action.error }

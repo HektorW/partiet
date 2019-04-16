@@ -1,7 +1,7 @@
-const leagueTable = require('../../../asp.malmokorpenfotboll/leagueTable')
+const fetchLeagueTable = require('../../malmokorpen/fetchLeagueTable')
 
 module.exports = async function leagueTableHandler(ctx) {
-  const { leagueId, teamName } = ctx.params
+  const { leagueId } = ctx.params
 
-  ctx.body = await leagueTable(leagueId, teamName)
+  ctx.body = await fetchLeagueTable(leagueId)
 }
