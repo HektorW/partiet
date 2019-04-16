@@ -13,22 +13,24 @@ module.exports = async function sendPushNotification(
   notificationData,
   options
 ) {
-  const subscription = JSON.parse(subscriptionModel.subscriptionJson)
+  const subscriptionInfo = JSON.parse(subscriptionModel.subscriptionJson)
   try {
     await webPush.sendNotification(
-      subscription,
+      subscriptionInfo,
       JSON.stringify(notificationData),
       options
     )
   } catch (error) {
     console.error('failed to send push notification', {
-      subscription: subscription.id,
+      subscription: subscriptionModel.id,
       error
     })
 
     if (error.statusCode === 404 || error.statusCode === 410) {
-      console.log('removing subscription', { subscription: subscription.id })
-      await removePushSubscriptionById(subscription.id)
+      console.log('removing subscription', {
+        subscription: subscriptionModel.id
+      })
+      await removePushSubscriptionById(subscriptionModel.id)
     }
 
     throw error
