@@ -15,22 +15,28 @@
 
     th,
     td {
-      &:nth-child(3),
-      &:nth-child(4) {
+      padding: 0.5em 0.25em;
+
+      &:nth-child(n + 3) {
         text-align: center;
       }
     }
 
     th {
       font-size: 0.8em;
-      padding: 1em;
+      padding-bottom: 1em;
+      padding-top: 1em;
     }
 
     td {
-      padding: 0.5em 1em;
+      // padding: 0.5em 1em;
 
-      &:nth-child(3) {
+      &:nth-child(n + 3) {
         font-size: 0.7em;
+      }
+
+      &:last-child {
+        font-size: 1em;
       }
     }
 

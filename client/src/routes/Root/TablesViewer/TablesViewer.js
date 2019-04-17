@@ -18,6 +18,12 @@ const TablesViewer = ({ tableRows, isFetching, fetchError }) => (
               <th>Position</th>
               <th>Team</th>
               <th>Played</th>
+
+              <th>W</th>
+              <th>D</th>
+              <th>L</th>
+              <th>S</th>
+              <th>C</th>
               <th>Points</th>
             </tr>
           </thead>
@@ -35,6 +41,13 @@ const TablesViewer = ({ tableRows, isFetching, fetchError }) => (
                 <td>{team.position}</td>
                 <td>{team.name}</td>
                 <td>{team.played}</td>
+
+                <td>{team.won}</td>
+                <td>{team.draw}</td>
+                <td>{team.lost}</td>
+                <td>{team.scored}</td>
+                <td>{team.conceded}</td>
+
                 <td>{team.points}</td>
               </tr>
             ))}
