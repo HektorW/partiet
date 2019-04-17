@@ -8,13 +8,13 @@ export const TEAMS_UPDATED = 'TABLES_TEAMS_UPDATED'
 export const fetchLeagueTable = leagueId => async dispatch => {
   dispatch({ type: FETCHING_TABLE_REQUEST })
 
-  let tableRows
+  let table
   try {
-    tableRows = await get(`/api/malmokorpen/leaguetable/${leagueId}`)
+    table = await get(`/api/malmokorpen/leaguetable/${leagueId}`)
   } catch (error) {
     dispatch({ type: FETCHING_TABLE_FAILURE, error })
     return
   }
 
-  dispatch({ type: FETCHING_TABLE_SUCCESS, tableRows })
+  dispatch({ type: FETCHING_TABLE_SUCCESS, table })
 }

@@ -3,6 +3,7 @@ const bodyParser = require('koa-bodyparser')
 
 const api = require('./api')
 const client = require('./client')
+const graphqlServer = require('./graphql')
 
 const app = new Koa()
 
@@ -17,6 +18,8 @@ app.use(bodyParser())
 app.use(api.routes())
 app.use(api.allowedMethods())
 app.use(require('./middleware/check404'))
+
+graphqlServer.applyMiddleware({ app })
 
 app.use(client.createClientServeRoute())
 

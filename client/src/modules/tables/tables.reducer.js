@@ -16,7 +16,7 @@ export default function tablesReducer(state = initialState, action = {}) {
       return { ...state, isFetching: true, fetchError: null }
 
     case FETCHING_TABLE_SUCCESS:
-      return { ...state, isFetching: false, tableRows: action.tableRows }
+      return { ...state, isFetching: false, tableRows: action.table.rows }
 
     case FETCHING_TABLE_FAILURE:
       return { ...state, isFetching: false, fetchError: action.error }
