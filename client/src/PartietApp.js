@@ -6,11 +6,11 @@ import { initializePush } from './modules/notifications/notifications.actions'
 import { fetchLeagueTable } from './modules/tables/tables.actions'
 
 class PartietApp extends Component {
-  componentWillMount() {
-    const leagueId = '12'
-    const teamName = 'Partiet'
-    this.props.fetchLeagueTable(leagueId, teamName)
-    // this.props.fetchTeams(leagueId, teamName)
+  componentDidMount() {
+    const leagueId = 12
+    const teamId = 102
+    this.props.fetchLeagueTable(leagueId, teamId)
+    this.props.fetchMatches(leagueId, teamId)
     this.props.initializePush()
   }
 
@@ -25,7 +25,4 @@ const mapDispatchToProps = {
   initializePush
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(PartietApp)
+export default connect(null, mapDispatchToProps)(PartietApp)

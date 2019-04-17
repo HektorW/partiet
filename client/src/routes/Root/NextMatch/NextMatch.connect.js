@@ -1,8 +1,6 @@
 import { connect } from 'react-redux'
 import NextMatch from './NextMatch'
 import { getNextMatch } from '../../../modules/matches/matches.selectors'
-import { getTeamLeagueStats } from '../../../modules/tables/tables.utils'
-import { getOppositionName } from '../../../modules/matches/matches.utils'
 
 const mapStateToProps = state => {
   const match = getNextMatch(state)
@@ -11,12 +9,9 @@ const mapStateToProps = state => {
     return { match: null }
   }
 
-  const oppositionName = getOppositionName(match)
-  const opposition = getTeamLeagueStats(state.tables.teams, oppositionName)
-
   return {
     match,
-    opposition: opposition ? opposition : { name: oppositionName }
+    opposition: match.teamA.id === 102 ? match.teamB : match.teamA
   }
 }
 

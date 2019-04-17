@@ -40,9 +40,9 @@ const typeDefs = gql`
   }
 
   type Query {
-    getTable(leagueId: Int!): Table
-    getMatches(leagueId: Int!): [Match]
-    getTeamMatches(leagueId: Int!, teamId: Int!): [Match]
+    table(leagueId: Int = 12): Table
+    matches(leagueId: Int = 12): [Match]
+    teamMatches(leagueId: Int = 12, teamId: Int = 102): [Match]
   }
 `
 
@@ -66,19 +66,19 @@ const parseMatch = match => ({
 
 const resolvers = {
   Query: {
-    getTable: async (_, { leagueId }) => {
+    table: async (_, { leagueId }) => {
       console.log('getTable', { leagueId })
       const table = await fetchLeagueTable(leagueId)
       return table
     },
 
-    getMatches: async (_, { leagueId }) => {
+    matches: async (_, { leagueId }) => {
       console.log('getMatches', { leagueId })
       const matches = await fetchMatches(leagueId)
       return matches.map(parseMatch)
     },
 
-    getTeamMatches: async (_, { leagueId, teamId }) => {
+    teamMatches: async (_, { leagueId, teamId }) => {
       console.log('getTeamMatches', { leagueId, teamId })
       const matches = await fetchMatchesForTeam(leagueId, teamId)
       return matches.map(parseMatch)

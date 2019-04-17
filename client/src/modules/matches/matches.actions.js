@@ -4,18 +4,39 @@ export const FETCHING_MATCHES_REQUEST = 'TABLES_FETCHING_MATCHES_REQUEST'
 export const FETCHING_MATCHES_SUCCESS = 'TABLES_FETCHING_MATCHES_SUCCESS'
 export const FETCHING_MATCHES_FAILURE = 'TABLES_FETCHING_MATCHES_FAILURE'
 
-export const fetchMatches = (leagueId, teamName) => async dispatch => {
+export const fetchMatches = (leagueId, teamId) => async dispatch => {
   dispatch({ type: FETCHING_MATCHES_REQUEST })
 
-  let matches
+  let response
   try {
-    matches = await get(
-      `/api/malmokorpen/matchcalendar/${leagueId}/${teamName}`
-    )
+    const query = `
+    {
+      teamMatches(leagueId: ${leagueId}, teamId: ${teamId}) {
+        date
+        teamA {
+          id
+          name
+        }
+        teamB {
+          id
+          name
+        }
+        result {
+          teamAScore
+          teamBScore
+        }
+      }
+    }
+    `
+
+    response = await get(`/graphql?query=${query}`)
   } catch (error) {
     dispatch({ type: FETCHING_MATCHES_FAILURE, error })
     return
   }
 
-  dispatch({ type: FETCHING_MATCHES_SUCCESS, matches })
+  dispatch({
+    type: FETCHING_MATCHES_SUCCESS,
+    matches: response.data.teamMatches
+  })
 }
