@@ -88,7 +88,8 @@ const resolvers = {
 
 const apolloServer = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  playground: true
 })
 
 module.exports = apolloServer
