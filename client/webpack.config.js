@@ -38,7 +38,8 @@ const WEBPACK_CONFIG = {
     historyApiFallback: true,
     contentBase: DIST,
     proxy: {
-      '/api': 'http://localhost:4001/'
+      '/api': 'http://localhost:4001/',
+      '/graphql': 'http://localhost:4001/'
     }
   },
 

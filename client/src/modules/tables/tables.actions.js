@@ -8,13 +8,36 @@ export const TEAMS_UPDATED = 'TABLES_TEAMS_UPDATED'
 export const fetchLeagueTable = leagueId => async dispatch => {
   dispatch({ type: FETCHING_TABLE_REQUEST })
 
-  let table
+  let response
   try {
-    table = await get(`/api/malmokorpen/leaguetable/${leagueId}`)
+    const query = `
+    {
+      getTable(leagueId:${leagueId}) {
+        rows {
+          teamId
+          position
+          name
+          played
+          won
+          draw
+          lost
+          scored
+          conceded
+          goalDifference
+          points
+        }
+      }
+    }
+    `
+
+    response = await get(`/graphql?query=${query}`)
   } catch (error) {
     dispatch({ type: FETCHING_TABLE_FAILURE, error })
     return
   }
 
-  dispatch({ type: FETCHING_TABLE_SUCCESS, table })
+  dispatch({
+    type: FETCHING_TABLE_SUCCESS,
+    table: { ...response.data.getTable }
+  })
 }
