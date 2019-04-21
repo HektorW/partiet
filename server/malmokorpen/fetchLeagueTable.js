@@ -2,12 +2,13 @@ const getJson = require('./getJson')
 
 module.exports = async function fetchLeagueTable(leagueId) {
   const requestPath = `memberapi/teamsport/result/for_division?division_id=${leagueId}`
-  const { rows } = await getJson(requestPath)
+  const { rows, teams } = await getJson(requestPath)
 
   return {
-    rows: rows.map(teamRow => ({
+    rows: rows.map((teamRow, teamIndex) => ({
+      teamId: teams[teamIndex],
       position: teamRow[0],
-      teamId: teamRow[1][0],
+      imageId: teamRow[1][0],
       name: teamRow[1][1],
       played: teamRow[2],
       won: teamRow[3],

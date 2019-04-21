@@ -11,6 +11,7 @@ const typeDefs = gql`
   type TableRow {
     teamId: Int
     position: Int
+    imageId: Int
     name: String
     played: Int
     won: Int
