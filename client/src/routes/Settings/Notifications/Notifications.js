@@ -13,7 +13,7 @@ const Notifications = ({
 }) => (
   <section className="notifications">
     {isPushSupported ? (
-      <UILoadState isLoading={isLoading}>
+      <UILoadState isLoading={isLoading} minLoadingMs={1250}>
         {shouldShowLoadState => (
           <Fragment>
             <Checkbox
