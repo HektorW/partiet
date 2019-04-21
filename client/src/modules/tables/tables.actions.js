@@ -19,6 +19,7 @@ export const fetchLeagueTable = leagueId => async (dispatch, getState) => {
         rows {
           teamId
           position
+          imageId
           name
           played
           won

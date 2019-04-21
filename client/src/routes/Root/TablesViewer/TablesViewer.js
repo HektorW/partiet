@@ -38,17 +38,36 @@ const TablesViewer = ({ tableRows, isFetching, fetchError }) => (
                     : ''
                 }`}
               >
-                <td>{team.position}</td>
-                <td>{team.name}</td>
-                <td>{team.played}</td>
+                <td className="tables-viewer__table-data--position">
+                  {team.position}
+                </td>
+                <td className="tables-viewer__table-data--name">
+                  <img
+                    className="tables-viewer__table-data-image"
+                    src={`https://korpenmalmoidrottsforening.zoezi.se/api/public/image/get?size=30x30&type=usergroup&id=${
+                      team.imageId
+                    }`}
+                    alt={team.name}
+                  />
+                  {team.name}
+                </td>
+                <td className="tables-viewer__table-data--played">
+                  {team.played}
+                </td>
 
-                <td>{team.won}</td>
-                <td>{team.draw}</td>
-                <td>{team.lost}</td>
-                <td>{team.scored}</td>
-                <td>{team.conceded}</td>
+                <td className="tables-viewer__table-data--won">{team.won}</td>
+                <td className="tables-viewer__table-data--draw">{team.draw}</td>
+                <td className="tables-viewer__table-data--lost">{team.lost}</td>
+                <td className="tables-viewer__table-data--scored">
+                  {team.scored}
+                </td>
+                <td className="tables-viewer__table-data--conceded">
+                  {team.conceded}
+                </td>
 
-                <td>{team.points}</td>
+                <td className="tables-viewer__table-data--points">
+                  {team.points}
+                </td>
               </tr>
             ))}
           </tbody>

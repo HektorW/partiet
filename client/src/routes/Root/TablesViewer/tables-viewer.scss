@@ -63,6 +63,25 @@
         font-weight: $font-weight-bold;
       }
     }
+
+    &-data {
+      &--name {
+        align-items: center;
+        display: flex;
+      }
+
+      &--name & {
+        &-image {
+          $image-size: 15px;
+
+          border-radius: 50%;
+          height: $image-size;
+          margin-left: calc(-#{$image-size} - 0.5em);
+          margin-right: 0.5em;
+          width: $image-size;
+        }
+      }
+    }
   }
 
   @media screen and (min-width: $breakpoints-x-small) {
