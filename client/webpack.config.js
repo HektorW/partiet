@@ -45,6 +45,8 @@ const WEBPACK_CONFIG = {
 
   devtool: PRODUCTION === true ? false : 'source-map',
 
+  stats: DEVELOPMENT ? 'minimal' : 'normal',
+
   module: {
     rules: [
       {
