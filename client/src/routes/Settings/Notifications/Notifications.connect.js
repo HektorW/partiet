@@ -6,13 +6,15 @@ import {
 } from '../../../modules/notifications/notifications.actions'
 import {
   isPushSupported,
-  isSubscribed
+  isSubscribed,
+  isLoading
 } from '../../../modules/notifications/notifications.selectors'
 import * as featureSupport from '../../../service-worker/feature-support'
 
 const mapStateToProps = state => ({
   isPushSupported: isPushSupported(state),
   isSubscribed: isSubscribed(state),
+  isLoading: isLoading(state),
 
   notSupportedReasons: [
     `Service worker is ${
