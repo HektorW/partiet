@@ -19,6 +19,12 @@
       margin: 0 0 0 0.75em;
       text-transform: uppercase;
     }
+
+    &-settings-link {
+      color: inherit;
+      font-size: 10px;
+      margin-left: auto;
+    }
   }
 
   &__content {

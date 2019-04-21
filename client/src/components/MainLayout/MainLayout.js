@@ -11,6 +11,10 @@ const MainLayout = ({ children }) => (
       </Link>
 
       <h1 className="main-layout__header-title">Partiet</h1>
+
+      <Link className="main-layout__header-settings-link" to="/settings">
+        Settings
+      </Link>
     </header>
     <main className="main-layout__content">{children}</main>
   </div>
