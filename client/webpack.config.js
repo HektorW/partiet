@@ -135,7 +135,7 @@ if (DEVELOPMENT) {
 }
 
 if (PRODUCTION) {
-  WEBPACK_CONFIG.plugins.push(new CleanWebpackPlugin([DIST]))
+  WEBPACK_CONFIG.plugins.push(new CleanWebpackPlugin())
 }
 
 module.exports = WEBPACK_CONFIG

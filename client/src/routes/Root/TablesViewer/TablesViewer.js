@@ -4,8 +4,6 @@ import './tables-viewer.scss'
 
 const TablesViewer = ({ tableRows, isFetching, fetchError }) => (
   <div className="tables-viewer">
-    <h2>{this.leagueId}</h2>
-
     {isFetching && <div>Hämtar tabell..</div>}
 
     {fetchError && <div>Något gick fel, kunde inte hämta tabellen :(</div>}
