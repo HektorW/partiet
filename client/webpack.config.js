@@ -6,7 +6,7 @@ const { DefinePlugin, NamedModulesPlugin } = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 /* eslint-enable */
 
 const { env } = process
@@ -56,20 +56,17 @@ const WEBPACK_CONFIG = {
       },
       {
         test: /\.s?css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader'
-            },
-            {
-              loader: 'postcss-loader'
-            },
-            {
-              loader: 'sass-loader'
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: DEVELOPMENT
             }
-          ]
-        })
+          },
+          'css-loader',
+          'postcss-loader',
+          'sass-loader'
+        ]
       },
       {
         test: /.*\.(ttf|woff2?)$/i,
@@ -126,9 +123,9 @@ const WEBPACK_CONFIG = {
       template: join(STATIC, 'index.html'),
       filename: join(DIST, 'index.html')
     }),
-    new ExtractTextPlugin({
-      filename: 'styles.[contenthash].css',
-      disable: DEVELOPMENT === true
+    new MiniCssExtractPlugin({
+      filename: DEVELOPMENT ? '[name].css' : '[name].[hash].css',
+      chunkFilename: DEVELOPMENT ? '[id].css' : '[id].[hash].css'
     })
   ]
 }
