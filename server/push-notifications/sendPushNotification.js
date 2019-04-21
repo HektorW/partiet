@@ -18,13 +18,15 @@ module.exports = async function sendPushNotification(
   const subscriptionId = subscriptionModel.id
   const subscriptionInfo = JSON.parse(subscriptionModel.subscriptionJson)
   try {
-    await webPush.sendNotification(
+    const result = await webPush.sendNotification(
       subscriptionInfo,
       JSON.stringify(notificationData),
       options
     )
 
     log('successfully sent notification', { subscriptionId })
+
+    return result
   } catch (error) {
     if (error.statusCode === 404 || error.statusCode === 410) {
       log('web-push returned known error code, removing subscription', {

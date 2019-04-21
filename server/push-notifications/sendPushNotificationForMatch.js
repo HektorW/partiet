@@ -1,6 +1,8 @@
 const { addNotification } = require('../db/models/match-notification')
 const sendPushNotification = require('./sendPushNotification')
 
+const log = (...args) => console.log('sendPushNotificationForMatch', ...args)
+
 module.exports = async function sendPushNotificationForMatch(
   subscriptionModel,
   match
@@ -21,18 +23,26 @@ module.exports = async function sendPushNotificationForMatch(
     }
   }
 
-  try {
-    const result = await sendPushNotification(
-      subscriptionModel,
-      notificationData
-    )
+  const subscriptionId = subscriptionModel.id
+  const matchId = match.id
 
-    if (result.statusCode >= 200 && result.statusCode < 300) {
-      addNotification(subscriptionModel.id, match.id)
-    }
+  let sendResult
+  try {
+    sendResult = await sendPushNotification(subscriptionModel, notificationData)
   } catch (error) {
-    console.error('failed to send match notification', {
-      subscription: subscriptionModel.id
+    log('failed to send match notification', { subscriptionId })
+    return
+  }
+
+  if (sendResult.statusCode < 200 && sendResult.statusCode >= 300) {
+    log('received unknown status code from web-push', {
+      subscriptionId,
+      matchId,
+      statusCode: sendResult.statusCode,
+      sendResult
     })
   }
+
+  log('adding notification entry in DB', { subscriptionId, matchId })
+  addNotification(subscriptionId, matchId)
 }
