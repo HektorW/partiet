@@ -13,6 +13,7 @@ import {
 
 const initialState = {
   vapidPublicKey: null,
+  subscriptionId: null,
 
   isPushSupported: false,
   isSubscribed: false,

@@ -1,51 +1,80 @@
 const db = require('../index')
 const createTable = require('./utils/createTable')
 const { createModelCamelCaser } = require('./utils/camelCaseModel')
+const { removeNotificationsForSubscription } = require('./match-notification')
 
 const tableName = (exports.tableName = 'push_subscription')
 
 const tableColumnDefinitions = [
   'id SERIAL PRIMARY KEY',
   'subscriptionJson TEXT',
+  'userAgent TEXT',
   'subscribeDate TIMESTAMP DEFAULT now()'
 ]
 
-const { camelCaseAll } = createModelCamelCaser(tableColumnDefinitions)
-
-exports.setup = () => createTable(db, tableName, tableColumnDefinitions)
+const { camelCaseModel, camelCaseAll } = createModelCamelCaser(
+  tableColumnDefinitions
+)
 
 const subscriptionToJson = subscription => JSON.stringify(subscription)
 
-exports.addPushSubscription = async subscription => {
-  const subscriptionJson = subscriptionToJson(subscription)
+const log = (...args) => console.log(tableName, ...args)
 
-  const selectQuery = `SELECT id FROM ${tableName} WHERE subscriptionJson = $1`
-  const selectValues = [subscriptionJson]
-  const existingId = await db.get(selectQuery, selectValues)
+exports.setup = () =>
+  createTable(db, tableName, tableColumnDefinitions).then(() =>
+    log('model setup')
+  )
 
-  if (existingId) {
+exports.getSubscriptionBySubscriptionJson = subscriptionJson => {
+  const query = `SELECT * FROM ${tableName} WHERE subscriptionJson = $1`
+  const values = [subscriptionJson]
+
+  return db.get(query, values).then(camelCaseModel)
+}
+
+exports.addPushSubscription = async (subscriptionData, userAgent = null) => {
+  log('addPushSubscription', { userAgent })
+
+  const subscriptionJson = subscriptionToJson(subscriptionData)
+  const existingModel = await exports.getSubscriptionBySubscriptionJson(
+    subscriptionJson
+  )
+  if (existingModel) {
     return
   }
 
-  const insertColumns = ['subscriptionJson']
-  const insertValues = [subscriptionJson]
-  await db.insert(tableName, insertColumns, insertValues)
+  const insertColumns = ['subscriptionJson', 'userAgent']
+  const insertValues = [subscriptionJson, userAgent]
+
+  const modelId = await db.insert(tableName, insertColumns, insertValues)
+
+  log('addPushSubscription - successfull', { userAgent, modelId })
+
+  return modelId
 }
 
 exports.removePushSubscriptionById = async id => {
+  log('removePushSubscriptionById', { id })
+
+  await removeNotificationsForSubscription(id)
+
   const query = `DELETE FROM ${tableName} WHERE id = $1`
   const values = [id]
 
   return db.run(query, values)
 }
 
-exports.removePushSubscription = async subscription => {
-  const subscriptionJson = subscriptionToJson(subscription)
+exports.removePushSubscription = async subscriptionData => {
+  const subscriptionJson = subscriptionToJson(subscriptionData)
+  const subscriptionModel = await exports.getSubscriptionBySubscriptionJson(
+    subscriptionJson
+  )
 
-  const query = `DELETE FROM ${tableName} WHERE subscriptionJson = $1`
-  const values = [subscriptionJson]
+  if (!subscriptionModel) {
+    return
+  }
 
-  return db.run(query, values)
+  return exports.removePushSubscriptionById(subscriptionModel.id)
 }
 
 exports.getAllPushSubscriptions = async () => {

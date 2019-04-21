@@ -8,10 +8,18 @@ import {
   isPushSupported,
   isSubscribed
 } from '../../../modules/notifications/notifications.selectors'
+import * as featureSupport from '../../../service-worker/feature-support'
 
 const mapStateToProps = state => ({
   isPushSupported: isPushSupported(state),
-  isSubscribed: isSubscribed(state)
+  isSubscribed: isSubscribed(state),
+
+  notSupportedReasons: [
+    `Service worker is ${
+      featureSupport.isServiceWorkerSupported ? '' : 'not '
+    }supported`,
+    `Web push is ${featureSupport.isPushSupported ? '' : 'not '}supported`
+  ]
 })
 
 const mapDispatchToProps = {
@@ -33,8 +41,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   }
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  mergeProps
-)(Notifications)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
+  Notifications
+)

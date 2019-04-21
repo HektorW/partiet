@@ -15,7 +15,8 @@ exports.createModelCamelCaser = tableColumnDefinitions => {
     column => column.split(' ')[0]
   )
 
-  const _camelCaseModel = model => camelCaseModel(tableColumnProperties, model)
+  const _camelCaseModel = model =>
+    model ? camelCaseModel(tableColumnProperties, model) : model
 
   return {
     camelCaseModel: _camelCaseModel,

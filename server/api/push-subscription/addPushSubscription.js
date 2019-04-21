@@ -1,9 +1,12 @@
 const pushSubscriptionModel = require('../../db/models/push-subscription')
 
 module.exports = async function addPushSubscription(ctx) {
-  const { subscription } = ctx.request.body
+  const { subscription, userAgent } = ctx.request.body
 
-  await pushSubscriptionModel.addPushSubscription(subscription)
+  const subscriptionId = await pushSubscriptionModel.addPushSubscription(
+    subscription,
+    userAgent
+  )
 
-  ctx.body = { success: true }
+  ctx.body = { success: true, subscriptionId }
 }

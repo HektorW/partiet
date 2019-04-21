@@ -58,16 +58,19 @@ export const subscribeToPush = () => async (dispatch, getState) => {
   dispatch({ type: SUBSCRIBE_REQUEST })
 
   const { vapidPublicKey } = await get('/api/push-subscription/vapid')
+
+  let subscriptionId
   try {
     console.log(vapidPublicKey)
     const subscription = await subscribe(vapidPublicKey)
-    await sendSubscriptionToServer(subscription)
+    const response = await sendSubscriptionToServer(subscription)
+    subscriptionId = response.subscriptionId
   } catch (error) {
     dispatch({ type: SUBSCRIBE_FAILURE, error })
     return
   }
 
-  dispatch({ type: SUBSCRIBE_SUCCESS })
+  dispatch({ type: SUBSCRIBE_SUCCESS, subscriptionId })
 }
 
 const sendSubscriptionToServer = subscription => {
@@ -81,7 +84,8 @@ const sendSubscriptionToServer = subscription => {
           p256dh: subscriptionJson.keys.p256dh,
           auth: subscriptionJson.keys.auth
         }
-      }
+      },
+      userAgent: navigator.userAgent
     }
   }
 
