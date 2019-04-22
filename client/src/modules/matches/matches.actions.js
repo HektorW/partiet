@@ -12,6 +12,7 @@ export const fetchMatches = (leagueId, teamId) => async dispatch => {
     const query = `
     {
       teamMatches(leagueId: ${leagueId}, teamId: ${teamId}) {
+        id
         date
         teamA {
           id

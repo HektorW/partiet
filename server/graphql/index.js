@@ -24,6 +24,7 @@ const typeDefs = gql`
   }
 
   type Match {
+    id: Int
     date: String
     teamA: Team
     teamB: Team
@@ -48,6 +49,7 @@ const typeDefs = gql`
 `
 
 const parseMatch = match => ({
+  id: match.id,
   date: match.activity.startTime,
   teamA: {
     id: match.teams[0].id,

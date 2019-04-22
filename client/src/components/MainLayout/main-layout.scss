@@ -3,7 +3,9 @@
 .main-layout {
   &__header {
     align-items: center;
-    border-bottom: 4px solid $red;
+    background-color: $red;
+    color: $white;
+    // border-bottom: 4px solid $red;
     display: flex;
     padding: 1em;
 
@@ -28,13 +30,14 @@
   }
 
   &__content {
+    background-color: $color-background;
     padding: 1em;
   }
 
   @media screen and (min-width: $breakpoints-small) {
     &__header {
       &-logo {
-        height: 100px;
+        height: 80px;
       }
 
       &-title {

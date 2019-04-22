@@ -1,0 +1,27 @@
+@import '../../styles/variables.scss';
+
+.navigation {
+  background-color: $white;
+  bottom: 0;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  left: 0;
+  position: fixed;
+  right: 0;
+
+  &__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+  }
+
+  &__item {
+    flex: 1;
+    padding: 1rem;
+    text-align: center;
+
+    &-link {
+      color: $gold;
+      text-decoration: none;
+    }
+  }
+}
