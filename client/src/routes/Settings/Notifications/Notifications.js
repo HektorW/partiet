@@ -23,7 +23,7 @@ const Notifications = ({
             onChange={setSubscribed}
             disabled={shouldShowLoadState}
           >
-            Skicka notis om match resultat
+            Skicka notis för nya matchresultat
           </Checkbox>
 
           {shouldShowLoadState && (
