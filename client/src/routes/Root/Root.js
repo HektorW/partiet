@@ -9,7 +9,7 @@ const Root = () => (
   <MainLayout>
     <TablesViewer />
 
-    <NextMatch />
+    {/* <NextMatch /> */}
   </MainLayout>
 )
 

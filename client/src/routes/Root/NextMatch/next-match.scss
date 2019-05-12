@@ -1,11 +1,13 @@
 @import '../../../styles/variables';
 
 .next-match {
+  display: inline-block;
   margin: 4em 0 0;
+  padding: 2rem;
   text-align: center;
 
   &__heading {
-    font-family: $font-family-serif;
+    // font-family: $font-family-serif;
     font-size: 12px;
     text-transform: uppercase;
   }

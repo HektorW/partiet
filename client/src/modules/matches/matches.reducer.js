@@ -21,7 +21,7 @@ export default function tablesReducer(state = initialState, action = {}) {
         isFetching: false,
         matches: action.matches.map(match => ({
           ...match,
-          date: new Date(match.date)
+          date: new Date(match.date.replace(/ /, 'T'))
         }))
       }
 

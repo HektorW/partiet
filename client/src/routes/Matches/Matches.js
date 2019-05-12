@@ -4,27 +4,33 @@ import MainLayout from '../../components/MainLayout'
 import Loader from '../../components/Loader'
 import MatchList from '../../components/MatchList'
 import useUILoadState from '../../hooks/useUILoadState'
+import Surface from '../../components/Surface'
+import './matches.scss'
 
-const Component = ({ isFetching, upcomingMatches, playedMatches }) => {
+const Matches = ({ isFetching, upcomingMatches, playedMatches }) => {
   const shouldShowLoadState = useUILoadState(isFetching, 0)
 
   return (
-    <MainLayout>
+    <MainLayout className="matches">
       {shouldShowLoadState ? (
         <Loader />
       ) : (
         <>
-          <h2>Spelade matcher</h2>
-          <MatchList matches={playedMatches} />
+          <Surface className="matches__surface" withPadding>
+            <h2 className="matches__title">Spelade matcher</h2>
+            <MatchList matches={playedMatches} />
+          </Surface>
 
-          <h2>Kommande matcher</h2>
-          <MatchList matches={upcomingMatches} />
+          <Surface className="matches__surface" withPadding>
+            <h2 className="matches__title">Kommande matcher</h2>
+            <MatchList matches={upcomingMatches} />
+          </Surface>
         </>
       )}
     </MainLayout>
   )
 }
 
-Component.propTypes = {}
+Matches.propTypes = {}
 
-export default Component
+export default Matches

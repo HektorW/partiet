@@ -1,49 +1,60 @@
 @import '../../styles/variables';
 
 .main-layout {
-  &__header {
-    align-items: center;
-    background-color: $red;
-    color: $white;
-    // border-bottom: 4px solid $red;
-    display: flex;
-    padding: 1em;
+  &__team-name {
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: linear-gradient(35deg, $color-gold-shiny, $color-red);
+    color: $color-gold;
+    font-size: 16vw;
+    font-weight: $font-weight-bold;
+    letter-spacing: 2px;
+    line-height: 0.71;
+    margin: 0;
+    position: fixed;
+    right: 1rem;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    top: 0.5rem;
+    z-index: -1;
+  }
 
-    &-logo {
-      height: 50px;
-    }
-
-    &-title {
-      font-family: $font-family-serif;
-      font-size: 30px;
-      font-weight: $font-weight-normal;
-      letter-spacing: 1px;
-      margin: 0 0 0 0.75em;
-      text-transform: uppercase;
-    }
-
-    &-settings-link {
-      color: inherit;
-      font-size: 10px;
-      margin-left: auto;
-    }
+  &__logo {
+    display: none;
   }
 
   &__content {
-    background-color: $color-background;
-    padding: 1em;
-    padding-bottom: 5rem;
+    margin-left: auto;
+    max-width: 1200px;
+    padding: 12vw 1rem 5rem;
+    position: relative;
   }
 
-  @media screen and (min-width: $breakpoints-small) {
-    &__header {
-      &-logo {
-        height: 80px;
-      }
+  @media screen and (min-width: $breakpoints-large) {
+    padding-left: 20vw;
 
-      &-title {
-        margin-left: 1em;
-      }
+    &__team-name {
+      font-size: 14vw;
+    }
+
+    &__logo {
+      bottom: 5rem;
+      display: block;
+      left: 2rem;
+      max-width: 200px;
+      position: fixed;
+      width: 15vw;
+    }
+
+    &__content {
+      padding-top: 8vw;
+      z-index: 2;
+    }
+  }
+
+  @media screen and (min-width: $breakpoints-x-large) {
+    &__content {
+      margin-right: 5vw;
     }
   }
 }

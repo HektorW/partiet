@@ -1,98 +1,172 @@
 @import '../../../styles/variables';
 
 .tables-viewer {
-  margin: 0 auto;
-  max-width: 850px;
+  $row-height: 55px;
 
-  &__container {
-    overflow: auto;
+  margin: 0 auto;
+
+  &__title {
+    margin-bottom: 2rem;
+    margin-left: auto;
+    padding: 1rem;
+    text-align: center;
   }
 
   &__table {
-    border-collapse: collapse;
-    font-size: 12px;
-    width: 100%;
+    &,
+    thead,
+    tbody {
+      display: block;
+    }
+
+    thead {
+      background-color: $color-black;
+      color: $color-white;
+      font-size: 10px;
+      text-align: left;
+    }
+
+    tr {
+      display: flex;
+    }
 
     th,
     td {
-      padding: 0.5em 0.25em;
+      align-items: center;
+      display: flex;
+      height: $row-height;
+      justify-content: center;
+      padding: 0 0.5rem;
+      width: 60px;
 
-      &:nth-child(n + 3) {
-        text-align: center;
+      &:nth-child(2) {
+        flex: 1;
+        justify-content: flex-start;
+      }
+
+      &:nth-child(n + 3):nth-child(-n + 9),
+      &:nth-child(11) {
+        display: none;
       }
     }
 
     th {
-      font-size: 0.8em;
-      padding-bottom: 1em;
-      padding-top: 1em;
+      font-weight: $font-weight-normal;
+
+      &:first-child {
+        font-size: 0;
+
+        &::before {
+          content: '#';
+          font-size: 1rem;
+        }
+      }
     }
 
     td {
-      // padding: 0.5em 1em;
-
-      &:nth-child(n + 3) {
-        font-size: 0.7em;
+      &:nth-child(1),
+      &:nth-child(10) {
+        font-weight: bold;
       }
 
-      &:last-child {
-        font-size: 1em;
-      }
-    }
+      &:nth-child(2) {
+        justify-content: space-between;
 
-    &-head {
-      border-bottom: 1px solid $black;
-      text-align: left;
+        &::after {
+          background-color: $color-ececec;
+          content: '';
+          height: 70%;
+          margin: 0 -0.5rem 0 0.5rem;
+          width: 1px;
+        }
+      }
     }
 
     &-row {
-      &:nth-last-child(1) {
-        background-color: rgba($red, 0.1);
+      &:nth-child(even) {
+        background-color: $color-f9f9f9;
       }
 
-      &:nth-last-child(2) {
-        background-color: rgba($red, 0.075);
-      }
-
+      &:nth-child(1),
+      &:nth-last-child(1),
+      &:nth-last-child(2),
       &:nth-last-child(3) {
-        background-color: rgba($red, 0.05);
+        position: relative;
+
+        &::before {
+          content: '';
+          height: 100%;
+          position: absolute;
+          width: 3px;
+        }
+      }
+
+      &:nth-child(1)::before {
+        background-color: $color-gold;
+      }
+
+      &:nth-last-child(1)::before {
+        background-color: $color-red;
+      }
+
+      &:nth-last-child(2)::before {
+        background-color: $color-red-lighter;
+      }
+
+      &:nth-last-child(3)::before {
+        background-color: $color-red-lightest;
       }
 
       &--is-own {
-        // background-color: rgba($red, 0.15);
+        background-image: linear-gradient(35deg, $color-gold-shiny, $color-red);
+        // background-color: $color-gold-shiny !important;
+        color: $color-white;
         font-weight: $font-weight-bold;
       }
     }
+  }
 
-    &-data {
-      &--name {
-        align-items: center;
-        display: flex;
-      }
+  @media screen and (min-width: $breakpoints-small) {
+    &__title {
+      width: 50%;
+    }
 
-      &--name & {
-        &-image {
-          $image-size: 15px;
-
-          border-radius: 50%;
-          height: $image-size;
-          margin-left: calc(-#{$image-size} - 0.5em);
-          margin-right: 0.5em;
-          width: $image-size;
+    &__table {
+      th,
+      td {
+        &:nth-child(n + 3):nth-child(-n + 5) {
+          display: flex;
         }
       }
     }
   }
 
-  @media screen and (min-width: $breakpoints-x-small) {
+  @media screen and (min-width: $breakpoints-medium) {
     &__table {
-      font-size: 14px;
-    }
-  }
+      th,
+      td {
+        &:nth-child(n + 3):nth-child(-n + 9),
+        &:nth-child(11) {
+          display: flex;
+        }
 
-  @media screen and (min-width: $breakpoints-small) {
-    &__table {
-      font-size: 1rem;
+        &:nth-child(n + 3):nth-child(-n + 6) {
+          width: 80px;
+        }
+
+        &:nth-child(n + 7):nth-child(-n + 9) {
+          width: 50px;
+        }
+
+        &:nth-child(11) {
+          justify-content: flex-start;
+          width: 140px;
+        }
+      }
+
+      th {
+        height: 60px;
+      }
     }
   }
 }

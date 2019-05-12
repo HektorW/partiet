@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import FormattedDate from '../FormattedDate'
-import './match-list.scss'
 import FormattedTime from '../FormattedTime/FormattedTime'
+import './match-list.scss'
 
 const MatchList = ({ matches }) => (
   <ul className="match-list">

@@ -1,9 +1,15 @@
 const { ApolloServer, gql } = require('apollo-server-koa')
+const { getAllActiveLeagues } = require('../db/models/league')
 const fetchLeagueTable = require('../malmokorpen/fetchLeagueTable')
 const fetchMatches = require('../malmokorpen/fetchMatches')
 const fetchMatchesForTeam = require('../malmokorpen/fetchMatchesForTeam')
 
 const typeDefs = gql`
+  type League {
+    id: Int
+    mainTeamId: Int
+  }
+
   type Table {
     rows: [TableRow]
   }
@@ -42,6 +48,7 @@ const typeDefs = gql`
   }
 
   type Query {
+    activeLeagues: [League]
     table(leagueId: Int = 12): Table
     matches(leagueId: Int = 12): [Match]
     teamMatches(leagueId: Int = 12, teamId: Int = 102): [Match]
@@ -69,6 +76,8 @@ const parseMatch = match => ({
 
 const resolvers = {
   Query: {
+    activeLeagues: getAllActiveLeagues,
+
     table: async (_, { leagueId }) => {
       console.log('getTable', { leagueId })
       const table = await fetchLeagueTable(leagueId)

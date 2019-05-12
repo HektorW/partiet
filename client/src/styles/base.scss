@@ -1,6 +1,6 @@
 html {
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 *,
@@ -10,8 +10,8 @@ html {
 }
 
 body {
-  background-color: $white;
-  color: $black;
-  font-family: $font-family-open-sans;
+  background-color: $color-f6f6ee;
+  color: $color-navy;
+  font-family: $font-family-sans;
   margin: 0;
 }

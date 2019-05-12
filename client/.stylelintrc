@@ -1,5 +1,5 @@
 {
-  "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
+  "extends": ["stylelint-config-standard", "stylelint-prettier/recommended"],
 
   "plugins": ["stylelint-order"],
 
@@ -10,6 +10,8 @@
         "ignoreAtRules": ["extend"]
       }
     ],
+
+    "no-descending-specificity": null,
 
     "order/properties-alphabetical-order": true
   }

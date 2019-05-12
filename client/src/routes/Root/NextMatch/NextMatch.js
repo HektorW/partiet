@@ -1,11 +1,12 @@
 import React from 'react'
 import Months from '../../../constants/Months'
 import WeekDays from '../../../constants/WeekDays'
+import Surface from '../../../components/Surface'
 import './next-match.scss'
 
 const NextMatch = ({ match, opposition }) =>
   !match ? null : (
-    <div className="next-match">
+    <Surface className="next-match">
       <h2 className="next-match__heading">Nästa match är mot:</h2>
 
       <div className="next-match__opposition">
@@ -34,7 +35,7 @@ const NextMatch = ({ match, opposition }) =>
           {match.date.getMinutes()}
         </span>
       </div>
-    </div>
+    </Surface>
   )
 
 export default NextMatch

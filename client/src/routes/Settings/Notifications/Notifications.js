@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Checkbox from '../../../components/_inputs/Checkbox'
+import Surface from '../../../components/Surface'
 import useUILoadState from '../../../hooks/useUILoadState'
 import './notifications.scss'
 
@@ -11,12 +12,12 @@ const Notifications = ({
   notSupportedReasons,
   setSubscribed
 }) => {
-  const shouldShowLoadState = useUILoadState(isLoading, 100, 1250)
+  const shouldShowLoadState = useUILoadState(isLoading, 100, 1500)
 
   return (
-    <section className="notifications">
+    <Surface className="notifications" withPadding>
       {isPushSupported ? (
-        <Fragment>
+        <>
           <Checkbox
             className="notifications__checkbox"
             isChecked={isSubscribed}
@@ -31,16 +32,16 @@ const Notifications = ({
               Vänta lite, tar hand om några kopplingar bakom kulisserna
             </small>
           )}
-        </Fragment>
+        </>
       ) : (
-        <Fragment>
+        <>
           <p>Din webbläsare stödjer inte push notiser :(</p>
           <ul>
             {notSupportedReasons.map(reason => <li key={reason}>{reason}</li>)}
           </ul>
-        </Fragment>
+        </>
       )}
-    </section>
+    </Surface>
   )
 }
 
