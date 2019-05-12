@@ -6,11 +6,12 @@
   "author": "Hektor Wallin <hektorw@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": ">=7.8.0"
+    "node": "10.13.0"
   },
   "scripts": {
     "start": "node index.js",
-    "start:dev": "cross-env NODE_ENV=development nodemon --inspect=9000 index.js | bunyan -o short",
+    "start:dev":
+      "cross-env NODE_ENV=development nodemon --inspect=9000 index.js | bunyan -o short",
     "build": "cd client/ && npm install && npm run build",
     "heroku-postbuild": "npm run build"
   },
