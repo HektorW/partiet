@@ -24,8 +24,8 @@ const TablesViewer = ({ tableRows, isFetching, fetchError }) => (
               <th>Spelade</th>
 
               <th>Vunna</th>
-              <th>Förlorade</th>
               <th>Oavgjorde</th>
+              <th>Förlorade</th>
 
               <th>GM</th>
               <th>IM</th>
