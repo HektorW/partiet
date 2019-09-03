@@ -24,14 +24,14 @@ const TablesViewer = ({ tableRows, isFetching, fetchError }) => (
               <th>Spelade</th>
 
               <th>Vunna</th>
-              <th>Oavgjorde</th>
+              <th>Oavgjorda</th>
               <th>Förlorade</th>
 
               <th>GM</th>
               <th>IM</th>
               <th>MS</th>
 
-              <th>Points</th>
+              <th>Poäng</th>
 
               <th>Form</th>
             </tr>
